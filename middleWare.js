@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = 'thisismysecretkey';
+const JWT_SECRET = 'xxxxxxxxxxxxxxxxx';
 
 export const authMiddleware = (req,res,next)=>{
     const token = req.header("Authorization")?.replace("Bearer"," ");
