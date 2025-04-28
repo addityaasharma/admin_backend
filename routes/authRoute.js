@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { userAuth } from "../models/userModel.js";
 
 const router = express.Router();
-const JWT_SECRET = "thisismysecretkey";
+const JWT_SECRET = "xxxxxxxxxxxxxx";
 
 // Register API
 router.post("/register", async (req, res) => {
