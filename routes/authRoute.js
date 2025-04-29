@@ -2,16 +2,20 @@ import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { userAuth } from "../models/userModel.js";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const router = express.Router();
-const JWT_SECRET = "xxxxxxxxxxxxxx";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Register API
-router.post("/register", async (req, res) => {
+router.post("/signup", async (req, res) => {
   try {
     const { username, password } = req.body;
 
     if (!username || !password) {
+
       return res.status(400).json({ message: "username or password missing" });
     }
 
@@ -67,9 +71,10 @@ router.post("/", async (req, res) => {
       user: {
         username: user.username,
         _id: user._id,
-        // panelData: user.panelData,
+        panelData: user.panelData,
       },
     });
+
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ message: "Server Error", error });
