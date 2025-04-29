@@ -1,12 +1,14 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
 
-const JWT_SECRET = 'xxxxxxxxxxxxxxxxx';
+dotenv.config();
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export const authMiddleware = (req,res,next)=>{
-    const token = req.header("Authorization")?.replace("Bearer"," ");
+    const token = req.header("Authorization")?.replace("Bearer ","");
 
     if(!token){
-        return res.send(401).json({message : "No token"});
+        return res.status(401).json({message : "No token"});
     }
 
     try{
@@ -15,6 +17,6 @@ export const authMiddleware = (req,res,next)=>{
         next();
     }
     catch(error){
-        return res.send(401).json({message : 'Token is valid not valid'})
+        return res.status(401).json({message : 'Token is not valid'})
     }
 };
